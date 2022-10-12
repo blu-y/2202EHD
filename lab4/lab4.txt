@@ -1,0 +1,8 @@
+
+KEY1 pressed > SW0 high > number increase
+KEY1 pressed > SW0 low > number decrease
+KEY0 pressed > blank display > other KEY pressed return display 0
+
+7seg HEX0 	0xFF200020 6-0
+SW		0xFF200040 9-0
+KEY		0xFF200050 3-0
