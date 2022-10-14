@@ -36,4 +36,3 @@ BIT_CODES:          .byte   0b00111111, 0b00000110, 0b01011011, 0b01001111
                     .byte   0b01100110, 0b01101101, 0b01111101, 0b00000111
                     .byte   0b01111111, 0b01100111                  # 0 1 2 3 4 5 6 7 8 9
                     .skip   2                                       # pad with 2 bytes to maintain word alignment
-
