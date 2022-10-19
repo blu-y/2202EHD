@@ -12,10 +12,10 @@
         <type>Assembly Program</type>
         <source_files>
             <source_file filepath="true">address_map_nios2.s</source_file>
-            <source_file filepath="true">part2_key_isr.s</source_file>
-            <source_file filepath="true">part2_main.s</source_file>
-            <source_file filepath="true">part2_service.s</source_file>
-            <source_file filepath="true">part2_timer_isr.s</source_file>
+            <source_file filepath="true">part3_key_isr.s</source_file>
+            <source_file filepath="true">part3_main.s</source_file>
+            <source_file filepath="true">part3_service.s</source_file>
+            <source_file filepath="true">part3_timer_isr.s</source_file>
         </source_files>
         <options>
             <start_symbol>_start</start_symbol>
