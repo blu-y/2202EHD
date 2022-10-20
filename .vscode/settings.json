@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "ostream": "cpp",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "typeinfo": "c",
+        "address_map_nios2.h": "c",
+        "cmath": "c",
+        "*.tcc": "c"
+    }
+}
