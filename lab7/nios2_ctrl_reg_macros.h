@@ -30,3 +30,5 @@
 	do { dest = __builtin_rdctl(5); } while (0)
 
 #endif
+
+// do { } while(0) : if there are more than one statement

@@ -1,0 +1,31 @@
+    asm ("ldw       r1, 4(sp)");
+    asm ("ldw       r2, 8(sp)");
+    asm ("ldw       r3, 12(sp)");
+    asm ("ldw       r4, 16(sp)");
+    asm ("ldw       r5, 20(sp)");
+    asm ("ldw       r6, 24(sp)");
+    asm ("ldw       r7, 28(sp)");
+    asm ("ldw       r8, 32(sp)");
+    asm ("ldw       r9, 36(sp)");
+    asm ("ldw       r10, 40(sp)");
+    asm ("ldw       r11, 44(sp)");
+    asm ("ldw       r12, 48(sp)");
+    asm ("ldw       r13, 52(sp)");
+    asm ("ldw       r14, 56(sp)");
+    asm ("ldw       r15, 60(sp)");
+    asm ("ldw       r16, 64(sp)");
+    asm ("ldw       r17, 68(sp)");
+    asm ("ldw       r18, 72(sp)");
+    asm ("ldw       r19, 76(sp)");
+    asm ("ldw       r20, 80(sp)");
+    asm ("ldw       r21, 84(sp)");
+    asm ("ldw       r22, 88(sp)");
+    asm ("ldw       r23, 92(sp)");
+    //asm ("ldw       r24, 96(sp)");    // skip r24 = et, because it is saved above
+    asm ("ldw       r25, 100(sp)");
+    asm ("ldw       r26, 104(sp)");
+    //asm ("ldw       r27, 108(sp)");   // skip r27 because it is sp
+    asm ("ldw       r28, 112(sp)");
+    asm ("ldw       r29, 116(sp)");
+    asm ("ldw       r30, 120(sp)");
+    asm ("ldw       r31, 124(sp)");
