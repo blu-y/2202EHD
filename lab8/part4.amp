@@ -11,7 +11,7 @@
     <program>
         <type>C Program</type>
         <source_files>
-            <source_file filepath="true">8_2_2.c</source_file>
+            <source_file filepath="true">8_4_1.c</source_file>
             <source_file filepath="true">amp/lib/src/niosII_jtag_uart.c</source_file>
         </source_files>
         <options>

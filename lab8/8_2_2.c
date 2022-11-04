@@ -18,11 +18,7 @@ void wait_for_vsync();
 int main(void){
     pixel_ctrl_ptr = (int *) PIXEL_BUF_CTRL_BASE;  // pixel controller
     pixel_buffer_start = *pixel_ctrl_ptr;
-    volatile int pixel_buffer_start2;
-    pixel_buffer_start2 = *(pixel_ctrl_ptr+1);
-    printf("front buffer : %d\n", pixel_buffer_start);
-    printf("PIXEL_BUF_CTRL_BASE : %d\n", PIXEL_BUF_CTRL_BASE);
-    printf("back buffer : %d\n", pixel_buffer_start2);
+    
     int x0 = 100, x1 = 219, y = 239, a = 1;
     while(1){
         clear_screen(0x00, 0x00, 0x00);
