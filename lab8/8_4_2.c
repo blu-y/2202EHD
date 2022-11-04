@@ -20,7 +20,7 @@ short int back_buffer[512*256];
 
 int main(void){
     pixel_ctrl_ptr = (int *) PIXEL_BUF_CTRL_BASE;  // pixel controller
-    *(pixel_ctrl_ptr+1) = front_buffer;
+    *(pixel_ctrl_ptr) = front_buffer;
     wait_for_vsync();
 
     pixel_buffer_start = *pixel_ctrl_ptr;

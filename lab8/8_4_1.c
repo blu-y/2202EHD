@@ -27,7 +27,6 @@ int main(void){
     while(1){
         if (x == (SCREEN_WIDTH*2)) {x = 0; break;}
         x = x + 2;
-        pixel_buffer_start = *(pixel_ctrl_ptr + 1);
         clear_screen(0x00, 0x00, 0x00);
         draw_id(id1, x, y-5, 0xFF, 0xFF, 0xFF);
         draw_id(id2, x, y+5, 0xFF, 0xFF, 0xFF);
@@ -36,7 +35,6 @@ int main(void){
     while(1){
         if (x == SCREEN_WIDTH) x = 0;
         x = x + 2;
-        pixel_buffer_start = *(pixel_ctrl_ptr + 1);
         clear_screen(0x00, 0x00, 0x00);
         draw_id(id1, x, y-5, 0xFF, 0xFF, 0xFF);
         draw_id(id2, x, y+5, 0xFF, 0xFF, 0xFF);
