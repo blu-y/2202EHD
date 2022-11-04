@@ -1,17 +1,13 @@
 #include "address_map_nios2.h"
-
 #define PIXEL(r, g, b) \
     (short int)((((r)&0x1F)<<11) | (((g)&0x3F)<<5) | (((b)&0x1F)))
-
 #define FILL_PIXEL(x, y, r, g, b) \
     *(short int *)(pixel_buffer_start + (((y)&0xFF)<<10) + (((x)&0x1FF)<<1)) = PIXEL(r,g,b)
-
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
 volatile int pixel_buffer_start;
 volatile int *pixel_ctrl_ptr;
-
 void clear_screen(int r, int g, int b);
 void draw_square(int x1, int y1, int x2, int y2, int r, int g, int b);
 

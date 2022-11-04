@@ -1,11 +1,8 @@
 #include "address_map_nios2.h"
-
 #define PIXEL(r, g, b) \
-    (short int)((((r)&0x1F)<<11) | (((g)&0x3F)<<5) | (((b)&0x1F)))
-
+    (short int)((((r)&0x1F)<<11) | (((g)&0x3F)<<5) | (((b)&0x1F))) // pixel intensity : 5 6 5 bit
 #define FILL_PIXEL(x, y, r, g, b) \
-    *(short int *)(pixel_buffer_start + (((y)&0xFF)<<10) + (((x)&0x1FF)<<1)) = PIXEL(r,g,b)
-
+    *(short int *)(pixel_buffer_start + (((y)&0xFF)<<10) + (((x)&0x1FF)<<1)) = PIXEL(r,g,b) // M[address] (8, 9 bit) <- PIXEL
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
@@ -14,7 +11,7 @@ void clear_screen(int r, int g, int b);
 void draw_square(int x1, int y1, int x2, int y2, int r, int g, int b);
 
 int main(void){
-    volatile int * pixel_ctrl_ptr = (int *) PIXEL_BUF_CTRL_BASE;  // pixel controller
+    volatile int *pixel_ctrl_ptr = (int *) PIXEL_BUF_CTRL_BASE;  // pixel controller
     pixel_buffer_start = *pixel_ctrl_ptr;
 
     clear_screen(0xFF, 0xFF, 0xFF);
