@@ -30,6 +30,7 @@ void clear_screen(void){
 
 void plot_pixel(int x, int y, short int line_color){
     *(short int *)(pixel_buffer_start + (y<<10) + (x<<1)) = line_color;
+    // <<1 is to write 2byte pixel to byte
 }
 
 void draw_line(int x0, int y0, int x1, int y1, short int line_color){

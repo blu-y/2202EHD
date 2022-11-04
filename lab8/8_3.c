@@ -81,8 +81,8 @@ void draw_line(int x0, int y0, int x1, int y1, int r, int g, int b){
     else y_step = -1;
 
     for (int x = x0; x < x1; x++){
-        if (is_steep) plot_pixel(y, x, r, g, b);
-        else plot_pixel(x, y, r, g, b);
+        if (is_steep) FILL_PIXEL(y, x, r, g, b);
+        else FILL_PIXEL(x, y, r, g, b);
         error = error + deltay;
         if (error >= 0){
             y = y + y_step;
@@ -94,7 +94,7 @@ void draw_line(int x0, int y0, int x1, int y1, int r, int g, int b){
 void wait_for_vsync(){
     register int status;
     *pixel_ctrl_ptr = 1; // start the synchronization process
-
+    // write 1 at buffer (means start synchronizing)
     status = *(pixel_ctrl_ptr + 3);
     while ((status & 0x01) != 0)
         status = *(pixel_ctrl_ptr + 3);

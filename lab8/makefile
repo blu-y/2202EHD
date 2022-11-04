@@ -28,17 +28,17 @@ OCFLAGS		:= -O srec
 
 # Files
 HDRS		:=
-SRCS		:= 8_1.c amp/lib/src/niosII_jtag_uart.c
+SRCS		:= 8_2_2.c amp/lib/src/niosII_jtag_uart.c
 OBJS		:= $(patsubst %, %.o, $(SRCS))
 
 # Targets
-COMPILE: 8_1.srec
+COMPILE: 8_2_2.srec
 
-8_1.srec: 8_1.elf
+8_2_2.srec: 8_2_2.elf
 	$(RM) $@
 	$(OC) $(OCFLAGS) $< $@
 
-8_1.elf: $(OBJS)
+8_2_2.elf: $(OBJS)
 	$(RM) $@
 	$(CC) $(LDFLAGS) $(OBJS) -o $@
 
@@ -51,5 +51,5 @@ COMPILE: 8_1.srec
 	$(AS) $(ASFLAGS) $< -o $@
 
 CLEAN: 
-	$(RM) 8_1.srec 8_1.elf $(OBJS)
+	$(RM) 8_2_2.srec 8_2_2.elf $(OBJS)
 

@@ -1,6 +1,5 @@
 #include "address_map_nios2.h"
 #include <stdlib.h>
-#include <stdio.h>
 #define PIXEL(r, g, b) \
     (short int)((((r)&0x1F)<<11) | (((g)&0x3F)<<5) | (((b)&0x1F)))
 #define FILL_PIXEL(x, y, r, g, b) \
@@ -13,22 +12,32 @@ volatile int *pixel_ctrl_ptr;
 void clear_screen(int r, int g, int b);
 void draw_square(int x1, int y1, int x2, int y2, int r, int g, int b);
 void draw_line(int x0, int x1, int y0, int y1, int r, int g, int b);
+void draw_number(int x, int y, int n, int r, int g, int b);
+void draw_id(int a[10], int x, int y, int r, int g, int b);
 void wait_for_vsync();
+short int front_buffer[512*256];
+short int back_buffer[512*256];
 
 int main(void){
     pixel_ctrl_ptr = (int *) PIXEL_BUF_CTRL_BASE;  // pixel controller
+    *(pixel_ctrl_ptr+1) = front_buffer;
+    wait_for_vsync();
+
     pixel_buffer_start = *pixel_ctrl_ptr;
-    volatile int pixel_buffer_start2;
-    pixel_buffer_start2 = *(pixel_ctrl_ptr+1);
-    printf("front buffer : %d\n", pixel_buffer_start);
-    printf("PIXEL_BUF_CTRL_BASE : %d\n", PIXEL_BUF_CTRL_BASE);
-    printf("back buffer : %d\n", pixel_buffer_start2);
-    int x0 = 100, x1 = 219, y = 239, a = 1;
+    clear_screen(0x00, 0x00, 0x00);
+    *(pixel_ctrl_ptr+1) = back_buffer;
+
+    int id1[] = {2,0,1,6,1,2,1,1,5,0};
+    int id2[] = {2,0,1,7,1,2,4,2,1,8};
+    int x = 0;
+    int y = SCREEN_HEIGHT / 2;
     while(1){
+        if (x == SCREEN_WIDTH) x = 0;
+        x = x + 2;
+        pixel_buffer_start = *(pixel_ctrl_ptr + 1);
         clear_screen(0x00, 0x00, 0x00);
-        if (y == 0 || y == 239) a = -a;
-        y = y + a;
-        draw_line(x0, y, x1, y, 0xFF, 0xFF, 0xFF);
+        draw_id(id1, x, y-5, 0xFF, 0xFF, 0xFF);
+        draw_id(id2, x, y+5, 0xFF, 0xFF, 0xFF);
         wait_for_vsync();
     }
 }
@@ -81,4 +90,30 @@ void wait_for_vsync(){
     status = *(pixel_ctrl_ptr + 3);
     while ((status & 0x01) != 0)
         status = *(pixel_ctrl_ptr + 3);
+}
+
+int N[10][8][5] = {
+    {{0,1,1,1,0},{1,0,0,0,1},{1,0,0,0,1},{1,0,0,0,1},{1,0,0,0,1},{1,0,0,0,1},{1,0,0,0,1},{0,1,1,1,0}},
+    {{0,0,1,0,0},{0,1,1,0,0},{0,0,1,0,0},{0,0,1,0,0},{0,0,1,0,0},{0,0,1,0,0},{0,0,1,0,0},{0,1,1,1,0}},
+    {{0,1,1,1,0},{1,0,0,0,1},{0,0,0,0,1},{0,0,0,1,0},{0,0,1,0,0},{0,1,0,0,0},{1,0,0,0,0},{1,1,1,1,1}},
+    {{0,1,1,1,0},{1,0,0,0,1},{0,0,0,0,1},{0,0,1,1,0},{0,0,0,0,1},{0,0,0,0,1},{1,0,0,0,1},{0,1,1,1,0}},
+    {{0,0,0,1,0},{0,0,1,1,0},{0,1,0,1,0},{1,0,0,1,0},{1,1,1,1,1},{0,0,0,1,0},{0,0,0,1,0},{0,0,0,1,0}},
+    {{1,1,1,1,1},{1,0,0,0,0},{1,0,0,0,0},{1,1,1,1,0},{0,0,0,0,1},{0,0,0,0,1},{1,0,0,0,1},{0,1,1,1,0}},
+    {{0,0,1,1,0},{0,1,0,0,0},{1,0,0,0,0},{1,1,1,1,0},{1,0,0,0,1},{1,0,0,0,1},{1,0,0,0,1},{0,1,1,1,0}},
+    {{1,1,1,1,1},{0,0,0,0,1},{0,0,0,1,0},{0,0,0,1,0},{0,0,1,0,0},{0,0,1,0,0},{0,1,0,0,0},{0,1,0,0,0}},
+    {{0,1,1,1,0},{1,0,0,0,1},{1,0,0,0,1},{0,1,1,1,0},{1,0,0,0,1},{1,0,0,0,1},{1,0,0,0,1},{0,1,1,1,0}},
+    {{0,1,1,1,0},{1,0,0,0,1},{1,0,0,0,1},{1,0,0,0,1},{0,1,1,1,1},{0,0,0,0,1},{0,0,0,1,0},{0,1,1,0,0}}
+};
+
+void draw_number(int x, int y, int n, int r, int g, int b){
+    for (int i = 0; i < 5; i++)
+        for (int j = 0; j < 8; j++)
+            if (N[n][j][i])
+                FILL_PIXEL((x+i-2)%SCREEN_WIDTH, (y+j-3)%SCREEN_HEIGHT, r, g, b);
+}
+
+void draw_id(int id[10], int x, int y, int r, int g, int b){
+    for (int i = 0; i < 10; i++){
+        draw_number(x+6*i, y, id[i], r, g, b);
+    }
 }

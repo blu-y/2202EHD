@@ -20,7 +20,7 @@ int main(void){
     int x0 = 100, x1 = 219, y = 239, a = 1;
     while(1){
         clear_screen(0x00, 0x00, 0x00);
-        if (y == 0 || a == 239) a = -a;
+        if (y == 0 || y == 239) a = -a;
         y = y + a;
         draw_line(x0, y, x1, y, 0xFF, 0xFF, 0xFF);
     }
@@ -57,8 +57,8 @@ void draw_line(int x0, int y0, int x1, int y1, int r, int g, int b){
     else y_step = -1;
 
     for (int x = x0; x < x1; x++){
-        if (is_steep) plot_pixel(y, x, r, g, b);
-        else plot_pixel(x, y, r, g, b);
+        if (is_steep) FILL_PIXEL(y, x, r, g, b);
+        else FILL_PIXEL(x, y, r, g, b);
         error = error + deltay;
         if (error >= 0){
             y = y + y_step;
