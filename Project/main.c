@@ -2,10 +2,7 @@
 
 #include "address_map_nios2.h"
 #include "nios2_ctrl_reg_macros.h"
-#define t0 6 // ultrasonic 0 trigger pin#
-#define e0 7 // ultrasonic 0 echo pin#
-#define t1 8 // ultrasonic 1 trigger pin#
-#define e1 9 // ultrasonic 1 echo pin#
+#include "ultrasonic_address.h"
 volatile int *HEX3_HEX0_ptr = (int *) HEX3_HEX0_BASE;
 volatile int *TIMER_ptr = (int *) TIMER_BASE;
 volatile int *KEY_ptr = (int *) KEY_BASE;
@@ -16,12 +13,15 @@ int count = 0;              // initialize HEX CODE
 int state = 0;              // calibrated = 1
 int start = 0;
 int r = 1;                  // radius(mm)
-int d = 0;                  // calibrated distance(mm)
+float d = 0;                // calibrated distance(m)
 int a = 0;                  // first sonic distance(mm)
 int b = 0;                  // second sonic distance(mm)
+int a_ = 0;                 // new first sonic distance(mm)
+int b_ = 0;                 // new second sonic distance(mm)
 int u0 = 0;                 // first sonic state
 int u1 = 0;                 // second sonic state
-int speed = 0;              // speed(m/s)
+int dt = 0;                 // time difference
+int speed = 0;              // speed(mm/s)
 
 int HEX[11] = {
     0b00111111, 0b00000110, 0b01011011, 0b01001111,
@@ -57,9 +57,10 @@ void display_hex4(int n){
     // no need to save HEX5-4
 }
 void display_loading(int n){
-    if (n==0) *HEX3_HEX0_ptr = 16843009;  // display '£þ£þ£þ£þ'
-    else if (n==1) *HEX3_HEX0_ptr = 1077952576;  // display '----'
-    else if (n==2) *HEX3_HEX0_ptr = 134744072;  // display '____'
+    if (n==1) *HEX3_HEX0_ptr = 16843009;        // display '£þ£þ£þ£þ'
+    else if (n==2) *HEX3_HEX0_ptr = 101058054;  // display ' ||||'
+    else if (n==3) *HEX3_HEX0_ptr = 134744072;  // display '____'
+    else if (n==4) *HEX3_HEX0_ptr = 808464432;  // display '|||| '
     else *HEX3_HEX0_ptr =0;
 }
 void set_period(int us){
@@ -91,13 +92,26 @@ int main(void){
     enable_nios2_interrupts();
     while (1){
         if (state==1) {
-            display_loading(0);
-            u0 = 1;
-            u1 = 1;
+            display_loading(1);
+            if (u0==0) u0 = 1;
         }
-        else if (state==2) display_loading(1);
-        else if (state==3) display_loading(2);
-        else if (state==4) display_hex4(speed);
-        else display_loading(3);
+        else if (state==2) {
+            display_loading(2);
+            if (u1==0) u1 = 1;
+        }
+        else if (state==3) {
+            display_loading(3);
+            if (u0==0) u0 = 1;
+        }
+        else if (state==4) {
+            display_loading(4);
+            if (u1==0) u1 = 1;
+        }
+        else if (state==5) {
+            speed = d/dt;
+            display_hex4(speed);
+        }
+        else display_loading(0);
     }
+    return 0;
 }
