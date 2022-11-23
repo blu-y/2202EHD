@@ -78,7 +78,7 @@ void config_timer(int us){
 void config_KEYs(){ *(KEY_ptr + 2) = 0b0001; }  // enable interrupts for KEY0 (2 means 8byte)
 void config_GPIO(){
     *JP1_ptr = 0;
-    *(JP1_ptr+1) = 0b1<<e0 + 0b1<<e1;
+    *(JP1_ptr+1) = (0b1<<e0) + (0b1<<e1);
 }
 void enable_nios2_interrupts(void){
     NIOS2_WRITE_IENABLE(0b11);  // set interrupt mask bit for KEY, TIMER
