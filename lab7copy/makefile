@@ -28,17 +28,17 @@ OCFLAGS		:= -O srec
 
 # Files
 HDRS		:=
-SRCS		:= 7_3_exception_handler.c 7_3_pushbutton_ISR.c 7_3_timer_ISR.c 7_3.c amp/lib/src/niosII_jtag_uart.c
+SRCS		:= amp/lib/src/niosII_jtag_uart.c 7_1.c 7_1_exception_handler.c 7_1_pushbutton_ISR.c
 OBJS		:= $(patsubst %, %.o, $(SRCS))
 
 # Targets
-COMPILE: 7_3_exception_handler.srec
+COMPILE: niosII_jtag_uart.srec
 
-7_3_exception_handler.srec: 7_3_exception_handler.elf
+niosII_jtag_uart.srec: niosII_jtag_uart.elf
 	$(RM) $@
 	$(OC) $(OCFLAGS) $< $@
 
-7_3_exception_handler.elf: $(OBJS)
+niosII_jtag_uart.elf: $(OBJS)
 	$(RM) $@
 	$(CC) $(LDFLAGS) $(OBJS) -o $@
 
@@ -51,5 +51,5 @@ COMPILE: 7_3_exception_handler.srec
 	$(AS) $(ASFLAGS) $< -o $@
 
 CLEAN: 
-	$(RM) 7_3_exception_handler.srec 7_3_exception_handler.elf $(OBJS)
+	$(RM) niosII_jtag_uart.srec niosII_jtag_uart.elf $(OBJS)
 

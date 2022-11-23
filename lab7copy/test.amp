@@ -11,10 +11,10 @@
     <program>
         <type>C Program</type>
         <source_files>
+            <source_file filepath="true">7_3.c</source_file>
             <source_file filepath="true">7_3_exception_handler.c</source_file>
             <source_file filepath="true">7_3_pushbutton_ISR.c</source_file>
             <source_file filepath="true">7_3_timer_ISR.c</source_file>
-            <source_file filepath="true">7_3.c</source_file>
             <source_file filepath="true">amp/lib/src/niosII_jtag_uart.c</source_file>
         </source_files>
         <options>

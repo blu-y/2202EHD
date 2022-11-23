@@ -6,6 +6,7 @@
         "typeinfo": "c",
         "address_map_nios2.h": "c",
         "cmath": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "nios2_ctrl_reg_macros.h": "c"
     }
 }

@@ -9,7 +9,8 @@ void timer_ISR(void);
 /* The assembly language code below handles CPU reset processing */
 void the_reset(void) __attribute__ ((section (".reset")));
 void the_reset(void){
-    /* Reset code. */           // inline asm
+    /* Reset code : reset is also an interrupt */
+    // inline asm
     asm (".set      noat");     // allow using at without warning
     asm (".set      nobreak");  // allow using ba, bt without warning
     asm ("movia     r2, main");
@@ -18,7 +19,7 @@ void the_reset(void){
 
 void the_exception (void) __attribute__ ((section (".exceptions")));
 void the_exception (void){
-    /* Exception code, backup, call interrupt and restore all register */
+    /* Exception code : backup, call interrupt and restore all register */
     asm (".set      noat");
     asm (".set      nobreak");
     asm ("subi      sp, sp, 128");
