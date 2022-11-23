@@ -90,7 +90,11 @@ int main(void){
     config_GPIO();
     enable_nios2_interrupts();
     while (1){
-        if (state==1) display_loading(0);
+        if (state==1) {
+            display_loading(0);
+            u0 = 1;
+            u1 = 1;
+        }
         else if (state==2) display_loading(1);
         else if (state==3) display_loading(2);
         else if (state==4) display_hex4(speed);

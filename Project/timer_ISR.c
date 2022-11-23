@@ -9,8 +9,19 @@ extern int count;
 extern int state;     // access external variable
 extern int a;
 extern int b;
+extern int u0;
+extern int u1;
 void timer_ISR(void){
     /* TIMER - Interrupt Service Routine */
+    if (u0==1) {
+        
+    }
+
+
+
+
+    *TIMER_ptr = 0;
+    //
     if (state==2) {
         count++;
         if (count>10000){
