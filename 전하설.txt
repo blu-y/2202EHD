@@ -1,0 +1,29 @@
+기말 전범위
+이론위주+lab수행 내용과 관련된 간단한 (코딩) 문제
+용어에 대한 개념 정리 중요
+
+basics of computer systems
+embedded computer systems
+nios2based systems
+
+assembly programming for nios2
+mmio
+interrupt
+various peripherals (parrallel port, timer...)
+
+(low level) c programming for nios2
+mmio, interrupt
+display control
+
+knowledge and skills
+
+Key concepts
+1. cpu/mcu based systems
+2. mmio
+3. interrupt io
+4. low-level programming for controlling hardward
+5. basic peripherals: parallel port, imter, display, ...
+
+임베디드 시스템 embedded system
+platform
+firmware

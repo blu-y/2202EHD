@@ -1,4 +1,5 @@
-/* TP */
+/* 2022 02 HD Term Project */
+
 #include "stdio.h"
 #include "address_map_nios2.h"
 #include "nios2_ctrl_reg_macros.h"
