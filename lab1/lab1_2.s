@@ -19,4 +19,3 @@ NUMBERS:		.word		4, 5, 3, 6
                 .word       1, 8, 2
 
         .end
-

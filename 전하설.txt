@@ -22,7 +22,7 @@ Key concepts
 2. mmio
 3. interrupt io
 4. low-level programming for controlling hardward
-5. basic peripherals: parallel port, imter, display, ...
+5. basic peripherals: parallel port, timer, display, ...
 
 임베디드 시스템 embedded system
 platform
